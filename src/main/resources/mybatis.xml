@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- Continue editing here -->
+    <properties resource="db.properties"/>
+
+    <environments default="mysql">
+        <environment id="mysql">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver.driver}"/>
+                <property name="url" value="${driver.url}"/>
+                <property name="username" value="${driver.usenname}"/>
+                <property name="password" value="${driver.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <package name="com.github.stormwyrm.ssmadmin.dao"/>
+    </mappers>
+</configuration>
