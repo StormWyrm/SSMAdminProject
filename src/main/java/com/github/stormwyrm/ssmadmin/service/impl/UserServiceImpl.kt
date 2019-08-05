@@ -39,12 +39,12 @@ class UserServiceImpl : IUserService {
 
     //作用就是返回一个List集合，集合中装入的是角色描述
     private fun getAuthority(roles: List<Role>?): List<SimpleGrantedAuthority>? {
-       return roles?.let {
+        return roles?.let {
             val list = ArrayList<SimpleGrantedAuthority>()
             for (role in it) {
-                list.add(SimpleGrantedAuthority("ROLE_" + role.roleName))
+                list.add(SimpleGrantedAuthority("ROLE_${role.roleName}"))
             }
-             list
+            list
         }
 
     }

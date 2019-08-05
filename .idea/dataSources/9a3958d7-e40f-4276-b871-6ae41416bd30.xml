@@ -1673,22 +1673,26 @@ permissionId</ColNames>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="401" parent="297" name="PRIMARY">
+    <index id="401" parent="297" name="user_role_role_id_fk">
+      <ColNames>roleId</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="402" parent="297" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>userId
 roleId</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="402" parent="297" name="user_role_role_id_fk">
-      <ColNames>userId</ColNames>
-      <RefSchemaName>ssmadmin</RefSchemaName>
-      <RefTableName>role</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
     <foreign-key id="403" parent="297" name="user_role_user_id_fk">
       <ColNames>userId</ColNames>
       <RefSchemaName>ssmadmin</RefSchemaName>
       <RefTableName>user</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="404" parent="297" name="user_role_role_id_fk">
+      <ColNames>roleId</ColNames>
+      <RefSchemaName>ssmadmin</RefSchemaName>
+      <RefTableName>role</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
   </database-model>

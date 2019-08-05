@@ -6,8 +6,7 @@ import org.apache.ibatis.annotations.*
 interface IUserDao {
 
     @Select("select * from user where username=#{username}")
-    @Results(Result(
-            id = true, property = "id", column = "id"),
+    @Results(Result(id = true, property = "id", column = "id"),
             Result(property = "username", column = "username"),
             Result(property = "email", column = "email"),
             Result(property = "password", column = "password"),
