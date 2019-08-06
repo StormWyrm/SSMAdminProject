@@ -4,6 +4,7 @@ import com.github.stormwyrm.ssmadmin.dao.IProductDao
 import com.github.stormwyrm.ssmadmin.domain.Product
 import com.github.stormwyrm.ssmadmin.service.IProductService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service("productService")

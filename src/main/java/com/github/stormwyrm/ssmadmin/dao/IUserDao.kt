@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.*
 
 interface IUserDao {
 
-    @Select("select * from user where username=#{username}")
+    @Select("SELECT * FROM user WHERE username=#{username}")
     @Results(Result(id = true, property = "id", column = "id"),
             Result(property = "username", column = "username"),
             Result(property = "email", column = "email"),
@@ -15,13 +15,7 @@ interface IUserDao {
             Result(property = "roles", column = "id", javaType = List::class, many = Many(select = "com.github.stormwyrm.ssmadmin.dao.IRoleDao.findByUserId")))
     fun findByUsername(username: String): UserInfo?
 
-    @Select("select * from user")
-    fun findAll(): List<UserInfo>
-
-    @Insert("insert into userInfo(email,username,password,phoneNum,status) values(#{email},#{username},#{password},#{phoneNum},#{status})")
-    fun save(userInfo: UserInfo)
-
-    @Select("select * from user where id=#{id}")
+    @Select("SELECT * FROM user WHERE id=#{id}")
     @Results(
             Result(id = true, property = "id", column = "id"),
             Result(property = "username", column = "username"),
@@ -31,4 +25,22 @@ interface IUserDao {
             Result(property = "status", column = "status"),
             Result(property = "roles", column = "id", javaType = List::class, many = Many(select = "com.github.stormwyrm.ssmadmin.dao.IRoleDao.findByUserId")))
     fun findById(id: String): UserInfo?
+
+    @Select("SELECT * FROM user WHERE id IN (SELECT * FROM user_role WHERE roleId = #{roleId})")
+    @Results(
+            Result(id = true, property = "id", column = "id"),
+            Result(property = "username", column = "username"),
+            Result(property = "email", column = "email"),
+            Result(property = "password", column = "password"),
+            Result(property = "phoneNum", column = "phoneNum"),
+            Result(property = "status", column = "status"),
+            Result(property = "roles", column = "id", javaType = List::class, many = Many(select = "com.github.stormwyrm.ssmadmin.dao.IRoleDao.findByUserId")))
+    fun findByRoleId(roleId: String): List<UserInfo>?
+
+
+    @Select("SELECT * FROM user")
+    fun findAll(): List<UserInfo>
+
+    @Insert("INSERT INTO user VALUES(#{id},#{email},#{username},#{password},#{phoneNum},#{status})")
+    fun save(userInfo: UserInfo)
 }

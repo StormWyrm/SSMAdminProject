@@ -7,7 +7,7 @@ interface IUserService : UserDetailsService {
 
     fun findAll(): List<UserInfo>
 
-    fun save(userInfoInfo: UserInfo)
+    fun save(userInfo: UserInfo)
 
     fun findById(id: String): UserInfo?
 }

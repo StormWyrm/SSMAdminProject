@@ -5,6 +5,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
     <!--配置不拦截的资源-->
     <security:http pattern="/login.jsp" security="none"/>
     <security:http pattern="/failer.jsp" security="none"/>
@@ -40,8 +42,8 @@
     <!-- 切换成数据库中的用户名和密码 -->
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userService">
-<!--            &lt;!&ndash; 配置加密的方式&ndash;&gt;-->
-<!--            <security:password-encoder ref="passwordEncoder"/>-->
+            <!-- 配置加密的方式-->
+            <security:password-encoder ref="passwordEncoder"/>
         </security:authentication-provider>
     </security:authentication-manager>
 

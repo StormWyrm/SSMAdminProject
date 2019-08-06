@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
-import java.util.ArrayList
+import java.util.*
 
 @Service("userService")
 class UserServiceImpl : IUserService {
@@ -17,13 +18,18 @@ class UserServiceImpl : IUserService {
     @Autowired
     private lateinit var userDao: IUserDao
 
+    @Autowired
+    private lateinit var passwordEncoder : BCryptPasswordEncoder
+
     override fun findById(id: String): UserInfo? {
         return userDao.findById(id)
     }
 
-    override fun save(UserInfo: UserInfo) {
+    override fun save(userInfo: UserInfo) {
+        userInfo.id = UUID.randomUUID().toString().substring(0,32).toUpperCase()
         //对密码进行加密处理
-        userDao.save(UserInfo)
+        userInfo.password = passwordEncoder.encode(userInfo.password)
+        userDao.save(userInfo)
     }
 
     override fun findAll(): List<UserInfo> {
@@ -33,7 +39,7 @@ class UserServiceImpl : IUserService {
     override fun loadUserByUsername(username: String): UserDetails? {
         val userInfo = userDao.findByUsername(username)
         return userInfo?.run {
-            User(username, "{noop}$password", status != 0, true, true, true, getAuthority(roles))
+            User(username, password, status != 0, true, true, true, getAuthority(roles))
         }
     }
 
