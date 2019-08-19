@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service
 
 @Service("roleService")
 class RoleServiceImpl : IRoleService {
-
     @Autowired
     private lateinit var roleDao: IRoleDao
 
@@ -25,7 +24,12 @@ class RoleServiceImpl : IRoleService {
     }
 
     override fun save(role: Role) {
+        role.id = "role${roleDao.getCount()+1}"
         return roleDao.save(role)
+    }
+
+    override fun deleteRoleById(id: String) {
+        roleDao.deleteRoleById(id)
     }
 
 }

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView
 
 @Controller
 @RequestMapping("/role")
-class RoleController {
+ class RoleController {
 
     @Autowired
     private lateinit var roleService: IRoleService
@@ -37,11 +37,17 @@ class RoleController {
         }
     }
 
-
-
     @RequestMapping("/save")
     fun save(role: Role): String {
         roleService.save(role)
         return "redirect:findAll"
     }
+
+    @RequestMapping("/deleteRoleById")
+    fun deleteRoleById(@RequestParam(name = "id", required = true) id: String): String {
+        roleService.deleteRoleById(id)
+        return "redirect:findAll"
+    }
+
+
 }

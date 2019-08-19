@@ -21,7 +21,7 @@ class OrderController {
                 @RequestParam(name = "size", required = true, defaultValue = "4") size: Int)
             : ModelAndView = ModelAndView().apply {
 
-        val orders = orderService.findAll(page,size)
+        val orders = orderService.findAll(page, size)
         val pageInfo = PageInfo(orders)
         addObject("pageInfo", pageInfo)
         viewName = "orders-page-list"

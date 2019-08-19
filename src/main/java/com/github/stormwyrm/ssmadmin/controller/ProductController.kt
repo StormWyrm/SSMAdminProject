@@ -10,7 +10,7 @@ import java.util.*
 
 @Controller
 @RequestMapping("/product")
-class ProductController {
+ class ProductController {
     @Autowired
     private lateinit var productService: IProductService
 

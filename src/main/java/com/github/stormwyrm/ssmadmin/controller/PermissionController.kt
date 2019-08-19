@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView
 
 @Controller
 @RequestMapping("/permission")
-class PermissionController{
+ class PermissionController{
 
     @Autowired
     private lateinit var permissionService : IPermissionService
@@ -27,6 +27,12 @@ class PermissionController{
         mv.viewName = "permission-show"
         mv.addObject("permission", permission)
         return mv
+    }
+
+    @RequestMapping("/deletePermission")
+    fun deletePermission(id : String) : String{
+        permissionService.delete(id)
+        return "redirect:findAll"
     }
 
     @RequestMapping("/save")

@@ -8,4 +8,6 @@ interface IPermissionService {
     fun save(permission: Permission)
 
     fun findById(id: String): Permission
+
+    fun delete(id : String)
 }

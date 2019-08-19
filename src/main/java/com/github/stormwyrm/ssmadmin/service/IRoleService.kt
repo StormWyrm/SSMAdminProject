@@ -11,4 +11,6 @@ interface IRoleService {
     fun findById(id: String) : Role
 
     fun findByPermissionId(id : String) : List<Role>
+
+    fun deleteRoleById(id: String)
 }

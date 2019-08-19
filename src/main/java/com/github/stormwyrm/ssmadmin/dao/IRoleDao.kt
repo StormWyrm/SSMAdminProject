@@ -38,4 +38,10 @@ interface IRoleDao {
 
     @Insert("INSERT INTO role VALUES(#{id},#{roleName},#{roleDesc})")
     fun save(role: Role)
+
+    @Select("SELECT COUNT(*) FROM role")
+    fun getCount() : Long
+
+    @Select("DELETE FROM role WHERE id=#{roleId}")
+    fun deleteRoleById(roleId: String)
 }
